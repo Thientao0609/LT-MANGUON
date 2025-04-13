@@ -1,5 +1,6 @@
 const express = require("express");
 var bodyParser = require("body-parser");
+var session = require("express-session");
 const connectDB = require("./config/connectDB");
 
 const app = express();
@@ -7,6 +8,14 @@ connectDB();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
+
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
 const port = 3000;
 const RootRoute = require("./routes/root");
