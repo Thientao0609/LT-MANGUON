@@ -1,0 +1,9 @@
+<%- include("layout.ejs") %>
+
+<div class="container mx-auto">
+    <h2 class="text-2xl font-bold"><%= task.title %></h2>
+    <p><strong>Mô tả:</strong> <%= task.description %></p>
+    <p><strong>Trạng thái:</strong> <%= task.status %></p>
+    <p><strong>Ngày hoàn thành:</strong> <%= task.dueDate.toDateString() %></p>
+    <p><strong>Điểm:</strong> <%= task.points %></p>
+</div>

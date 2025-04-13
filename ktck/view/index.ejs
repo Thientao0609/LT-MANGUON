@@ -1,0 +1,35 @@
+<%- include("layout.ejs") %>
+
+<div class="container mx-auto">
+    <form action="/search" method="GET" class="mb-4">
+        <input type="text" name="query" placeholder="Nhập tiêu đề hoặc mô tả" class="p-2 border rounded">
+        <select name="status" class="p-2 border rounded">
+            <option value="">Tất cả</option>
+            <option value="New">New</option>
+            <option value="Pending">Pending</option>
+            <option value="Done">Done</option>
+        </select>
+        <input type="date" name="date_from" class="p-2 border rounded">
+        <input type="date" name="date_to" class="p-2 border rounded">
+        <button type="submit" class="bg-blue-500 text-white p-2 rounded">Tìm kiếm</button>
+    </form>
+
+    <table class="w-full border-collapse border border-gray-400">
+        <tr class="bg-gray-200">
+            <th class="border border-gray-400 p-2">Tiêu đề</th>
+            <th class="border border-gray-400 p-2">Mô tả</th>
+            <th class="border border-gray-400 p-2">Trạng thái</th>
+            <th class="border border-gray-400 p-2">Ngày hoàn thành</th>
+            <th class="border border-gray-400 p-2">Điểm</th>
+        </tr>
+        <% tasks.forEach(task => { %>
+        <tr class="border border-gray-400 p-2">
+            <td class="p-2"><a href="/tasks/<%= task._id %>" class="text-blue-600"><%= task.title %></a></td>
+            <td class="p-2"><%= task.description %></td>
+            <td class="p-2"><%= task.status %></td>
+            <td class="p-2"><%= task.dueDate.toDateString() %></td>
+            <td class="p-2"><%= task.points %></td>
+        </tr>
+        <% }) %>
+    </table>
+</div>

@@ -18,9 +18,15 @@ class ProductController {
     //   products = await Product.find({ name: { $regex: ".*" + q + ".*" } });
     // } else {
     // Tìm các sản phẩm có số lượng từ 2-10
-    products = await Product.find({}).skip(skip).limit(limit);
+    try {
+      products = await Product.find({});
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
     // }
-    res.render("products/index", { products });
+    // res.render("products/index", { products });
+
+    res.json({ message: "Lấy dữ liệu thành công!!", data: products });
   }
   static async new(req, res) {
     res.render("products/new");
@@ -30,9 +36,9 @@ class ProductController {
     try {
       let { name, description } = req.body;
       const product = await Product.create({ name, description });
-      res.redirect("/products");
+      res.json({ message: "Tạo dữ liệu thành công!!", data: product });
     } catch (error) {
-      res.render("products/new");
+      res.status(500).json({ message: error.message });
     }
   }
 
